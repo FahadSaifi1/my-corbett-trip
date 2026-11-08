@@ -1,6 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { businessConfig } from "@/content/config";
 import { packagesData } from "@/content/packages";
@@ -128,13 +129,23 @@ export default async function AdLandingPage({
     <div className="min-h-screen flex flex-col bg-riverstone">
       {/* DISTRACTION-FREE AD HEADER (No standard navbar; only wordmark + WhatsApp) */}
       <header className="sticky top-0 z-50 bg-cream border-b border-sal-forest/15 px-4 sm:px-8 py-3.5 flex items-center justify-between">
-        <Link href="/" className="flex flex-col">
-          <span className="font-serif text-xl sm:text-2xl font-bold tracking-wider text-sal-forest uppercase">
-            My Corbett Trip
-          </span>
-          <span className="text-[10px] tracking-[0.2em] text-sal-forest/60 uppercase -mt-1">
-            Private Safari Specialist
-          </span>
+        <Link href="/" className="group flex items-center gap-3">
+          <Image
+            src="/Assets/logo my corbett trip.png"
+            alt="My Corbett Trip Logo"
+            width={40}
+            height={40}
+            className="h-9 sm:h-11 w-auto object-contain shrink-0"
+            priority
+          />
+          <div className="flex flex-col justify-center">
+            <span className="font-serif text-lg sm:text-xl font-bold tracking-wider text-sal-forest uppercase leading-tight">
+              My Corbett Trip
+            </span>
+            <span className="text-[9px] sm:text-[10px] tracking-[0.2em] text-sal-forest/60 uppercase">
+              Private Safari Specialist
+            </span>
+          </div>
         </Link>
 
         <a

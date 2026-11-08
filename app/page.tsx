@@ -91,17 +91,16 @@ export default function HomePage() {
               alt="Bengal Tiger in Corbett Tiger Reserve"
               fill
               priority
-              className="object-cover object-center"
+              className="object-cover object-center brightness-105 contrast-[1.03]"
               sizes="100vw"
             />
-            {/* Multi-layered cinematic gradient overlays for pristine readability */}
-            <div className="absolute inset-0 bg-gradient-to-r from-sal-forest/95 via-sal-forest/80 to-sal-forest/50" />
-            <div className="absolute inset-0 bg-gradient-to-t from-sal-forest via-sal-forest/30 to-black/30" />
-            <div className="absolute inset-0 bg-grain opacity-20 pointer-events-none" />
+            {/* Clear neutral scrim without green tint: softly dims behind text on the left, keeping the photo eye-catchy and vibrant */}
+            <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/45 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/15" />
           </div>
 
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-20 sm:pt-24 sm:pb-28">
-            <div className="max-w-3xl">
+            <div className="max-w-3xl drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]">
               <div className="inline-flex items-center gap-2 px-3 py-1 bg-cream/10 border border-cream/20 text-cream/90 text-xs font-mono uppercase tracking-[0.2em] mb-6">
                 <IconPugmark size={14} className="text-tiger-ochre" />
                 <span>Corbett Tiger Reserve Field Specialist</span>

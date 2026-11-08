@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { businessConfig } from "@/content/config";
 import { IconWhatsApp, IconPhone } from "@/components/ui/CustomIcons";
 
@@ -38,13 +39,23 @@ export const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20">
           {/* Logo / Brand Name */}
-          <Link href="/" className="group flex flex-col justify-center">
-            <span className="font-serif text-xl sm:text-2xl font-bold tracking-wider text-sal-forest uppercase transition-colors group-hover:text-tiger-ochre">
-              My Corbett Trip
-            </span>
-            <span className="text-[10px] tracking-[0.2em] text-sal-forest/60 uppercase -mt-1">
-              Naturalist Field Expeditions
-            </span>
+          <Link href="/" className="group flex items-center gap-3 py-1">
+            <Image
+              src="/Assets/logo my corbett trip.png"
+              alt="My Corbett Trip Logo"
+              width={48}
+              height={48}
+              className="h-10 sm:h-12 w-auto object-contain shrink-0"
+              priority
+            />
+            <div className="flex flex-col justify-center">
+              <span className="font-serif text-lg sm:text-xl font-bold tracking-wider text-sal-forest uppercase transition-colors group-hover:text-tiger-ochre leading-tight">
+                My Corbett Trip
+              </span>
+              <span className="text-[9px] sm:text-[10px] tracking-[0.2em] text-sal-forest/60 uppercase">
+                Naturalist Field Expeditions
+              </span>
+            </div>
           </Link>
 
           {/* Desktop Nav Links */}

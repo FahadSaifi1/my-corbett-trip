@@ -64,15 +64,16 @@ export default function DhikalaNightStayPage() {
               alt="Dhikala Forest Rest House and Grasslands inside Corbett Tiger Reserve"
               fill
               priority
-              className="object-cover object-center"
+              className="object-cover object-center brightness-105 contrast-[1.03]"
               sizes="100vw"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-sal-forest/95 via-sal-forest/85 to-sal-forest/65" />
-            <div className="absolute inset-0 bg-gradient-to-t from-sal-forest/90 via-transparent to-black/20" />
+            {/* Clear neutral scrim without green tint */}
+            <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/45 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/15" />
           </div>
 
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-3xl">
+            <div className="max-w-3xl drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]">
               <div className="flex items-center gap-2 mb-3">
                 <Badge variant="ochre">Inside Core Reserve</Badge>
                 <Badge variant="mist">British-Era Lodge (Built 1890)</Badge>

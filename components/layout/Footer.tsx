@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { businessConfig } from "@/content/config";
 import { officialFees } from "@/content/fees";
 import { IconWhatsApp, IconPhone, IconShieldCheck } from "@/components/ui/CustomIcons";
@@ -32,9 +33,18 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           {/* Col 1: Brand & Philosophy */}
           <div>
-            <span className="font-serif text-2xl font-bold tracking-wider text-cream uppercase block mb-3">
-              {businessConfig.name}
-            </span>
+            <div className="flex items-center gap-3 mb-4">
+              <Image
+                src="/Assets/logo my corbett trip.png"
+                alt="My Corbett Trip Logo"
+                width={40}
+                height={40}
+                className="h-10 w-auto object-contain brightness-110"
+              />
+              <span className="font-serif text-xl sm:text-2xl font-bold tracking-wider text-cream uppercase block">
+                {businessConfig.name}
+              </span>
+            </div>
             <p className="text-cream/70 text-xs sm:text-sm leading-relaxed mb-4">
               {businessConfig.tagline}. We connect discerning wildlife enthusiasts with licensed naturalists, official CTR permits, and heritage lodge hospitality.
             </p>
