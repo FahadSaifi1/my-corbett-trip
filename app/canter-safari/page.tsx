@@ -1,6 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { businessConfig } from "@/content/config";
 import { officialFees } from "@/content/fees";
 import { Navbar } from "@/components/layout/Navbar";
@@ -56,8 +57,21 @@ export default function CanterSafariPage() {
 
       <main className="flex-1">
         {/* Header */}
-        <section className="bg-sal-forest text-cream py-14 sm:py-20 border-b border-sal-forest/20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="relative bg-sal-forest text-cream py-14 sm:py-20 border-b border-sal-forest/20 overflow-hidden">
+          <div className="absolute inset-0 -z-0">
+            <Image
+              src="/Assets/dhikala night stay banner.png"
+              alt="Dhikala 16-Seater Canter Safari in Corbett Tiger Reserve"
+              fill
+              priority
+              className="object-cover object-center"
+              sizes="100vw"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-sal-forest/95 via-sal-forest/85 to-sal-forest/65" />
+            <div className="absolute inset-0 bg-gradient-to-t from-sal-forest/90 via-transparent to-black/20" />
+          </div>
+
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl">
               <div className="flex items-center gap-2 mb-3">
                 <Badge variant="ochre">Dhikala Zone Exclusively</Badge>

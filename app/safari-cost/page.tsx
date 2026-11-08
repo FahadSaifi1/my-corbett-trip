@@ -1,5 +1,6 @@
 import React from "react";
 import type { Metadata } from "next";
+import Image from "next/image";
 import { businessConfig } from "@/content/config";
 import { officialFees } from "@/content/fees";
 import { Navbar } from "@/components/layout/Navbar";
@@ -44,8 +45,21 @@ export default function SafariCostPage() {
 
       <main className="flex-1">
         {/* Header */}
-        <section className="bg-sal-forest text-cream py-14 sm:py-20 border-b border-sal-forest/20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="relative bg-sal-forest text-cream py-14 sm:py-20 border-b border-sal-forest/20 overflow-hidden">
+          <div className="absolute inset-0 -z-0">
+            <Image
+              src="/Assets/safari cost baner.png"
+              alt="Jim Corbett Safari Cost Calculator and Official Permit Pricing"
+              fill
+              priority
+              className="object-cover object-center"
+              sizes="100vw"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-sal-forest/95 via-sal-forest/85 to-sal-forest/65" />
+            <div className="absolute inset-0 bg-gradient-to-t from-sal-forest/90 via-transparent to-black/20" />
+          </div>
+
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl">
               <span className="text-xs font-mono uppercase tracking-[0.2em] text-tiger-ochre block mb-2">
                 Honest Safari Economics

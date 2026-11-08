@@ -2,6 +2,7 @@ import React from "react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { journalArticles } from "@/content/journal";
 import { businessConfig } from "@/content/config";
 import { Navbar } from "@/components/layout/Navbar";
@@ -85,8 +86,21 @@ export default async function JournalArticlePage({
 
       <main className="flex-1">
         {/* Article Header */}
-        <section className="bg-sal-forest text-cream py-12 sm:py-16 border-b border-sal-forest/20">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="relative bg-sal-forest text-cream py-12 sm:py-16 border-b border-sal-forest/20 overflow-hidden">
+          <div className="absolute inset-0 -z-0">
+            <Image
+              src="/Assets/journal banner.png"
+              alt={article.title}
+              fill
+              priority
+              className="object-cover object-center"
+              sizes="100vw"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-sal-forest/95 via-sal-forest/85 to-sal-forest/65" />
+            <div className="absolute inset-0 bg-gradient-to-t from-sal-forest/90 via-transparent to-black/20" />
+          </div>
+
+          <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <nav className="flex items-center gap-2 text-xs font-mono text-cream/60 mb-4 uppercase tracking-wider">
               <Link href="/" className="hover:text-cream">Home</Link>
               <span>/</span>

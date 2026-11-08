@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { businessConfig } from "@/content/config";
 import { packagesData } from "@/content/packages";
 import { corbettRules2026 } from "@/content/rules";
@@ -84,11 +85,22 @@ export default function HomePage() {
       <main className="flex-1">
         {/* 1. HERO SECTION */}
         <section className="relative bg-sal-forest text-cream overflow-hidden border-b border-sal-forest/20">
-          {/* Subtle nature grain & tonal gradient */}
-          <div className="absolute inset-0 bg-grain opacity-25 pointer-events-none" />
-          <div className="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-tiger-ochre/10 blur-3xl pointer-events-none" />
+          <div className="absolute inset-0 -z-0">
+            <Image
+              src="/Assets/homepage tiger banner.png"
+              alt="Bengal Tiger in Corbett Tiger Reserve"
+              fill
+              priority
+              className="object-cover object-center"
+              sizes="100vw"
+            />
+            {/* Multi-layered cinematic gradient overlays for pristine readability */}
+            <div className="absolute inset-0 bg-gradient-to-r from-sal-forest/95 via-sal-forest/80 to-sal-forest/50" />
+            <div className="absolute inset-0 bg-gradient-to-t from-sal-forest via-sal-forest/30 to-black/30" />
+            <div className="absolute inset-0 bg-grain opacity-20 pointer-events-none" />
+          </div>
 
-          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-20 sm:pt-24 sm:pb-28">
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-20 sm:pt-24 sm:pb-28">
             <div className="max-w-3xl">
               <div className="inline-flex items-center gap-2 px-3 py-1 bg-cream/10 border border-cream/20 text-cream/90 text-xs font-mono uppercase tracking-[0.2em] mb-6">
                 <IconPugmark size={14} className="text-tiger-ochre" />
