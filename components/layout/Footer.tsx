@@ -33,17 +33,14 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           {/* Col 1: Brand & Philosophy */}
           <div>
-            <div className="flex items-center gap-3 mb-4">
+            <div className="mb-4">
               <Image
                 src="/Assets/logo my corbett trip.png"
-                alt="My Corbett Trip Logo"
-                width={40}
-                height={40}
-                className="h-10 w-auto object-contain brightness-110"
+                alt="My Corbett Trip"
+                width={180}
+                height={89}
+                className="h-11 sm:h-12 w-auto object-contain brightness-110"
               />
-              <span className="font-serif text-xl sm:text-2xl font-bold tracking-wider text-cream uppercase block">
-                {businessConfig.name}
-              </span>
             </div>
             <p className="text-cream/70 text-xs sm:text-sm leading-relaxed mb-4">
               {businessConfig.tagline}. We connect discerning wildlife enthusiasts with licensed naturalists, official CTR permits, and heritage lodge hospitality.
@@ -184,6 +181,13 @@ export const Footer = () => {
                 >
                   <IconPhone size={14} className="text-tiger-ochre" />
                   <span>{businessConfig.phoneDisplay}</span>
+                </a>
+                <a
+                  href={`mailto:${businessConfig.email}`}
+                  className="flex items-center gap-2 hover:text-cream transition-colors py-1"
+                >
+                  <span className="text-tiger-ochre text-xs">✉</span>
+                  <span>{businessConfig.email}</span>
                 </a>
                 <a
                   href={`https://wa.me/${businessConfig.whatsapp}?text=Hi%2C%20I%20have%20an%20enquiry%20regarding%20Jim%20Corbett.`}

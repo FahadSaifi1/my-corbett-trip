@@ -317,7 +317,7 @@ export const LeadForm = ({
                 type="tel"
                 value={mobile}
                 onChange={(e) => setMobile(e.target.value)}
-                placeholder="+91 98765 43210"
+                placeholder="e.g. 84750 87411"
                 className="w-full bg-white border border-sal-forest/20 px-3 py-2.5 text-sm text-sal-forest focus:outline-none focus:border-sal-forest"
               />
               {errors.mobile && (

@@ -74,7 +74,8 @@ export async function POST(req: NextRequest) {
     const downstreamLogs: string[] = [];
 
     // 4a. Resend Email Dispatch (if configured)
-    if (process.env.RESEND_API_KEY && process.env.LEAD_NOTIFY_EMAIL) {
+    const leadEmailRecipient = process.env.LEAD_NOTIFY_EMAIL || businessConfig.email;
+    if (process.env.RESEND_API_KEY && leadEmailRecipient) {
       try {
         await fetch("https://api.resend.com/emails", {
           method: "POST",
@@ -84,7 +85,7 @@ export async function POST(req: NextRequest) {
           },
           body: JSON.stringify({
             from: "My Corbett Trip Leads <leads@mycorbetttrip.com>",
-            to: process.env.LEAD_NOTIFY_EMAIL,
+            to: leadEmailRecipient,
             subject: `🐅 New Lead [${leadId}]: ${leadData.fullName} - ${leadData.interest}`,
             html: `
               <h2>New Safari Lead Received: ${leadId}</h2>

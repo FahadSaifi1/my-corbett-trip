@@ -7,9 +7,9 @@ This document itemizes every real business detail and asset that requires input 
 ## 1. Business Credentials & Contact Details (`content/config.ts`)
 *These fields currently have clean placeholders or auto-hide until filled:*
 
-- [ ] **Phone Number (`phone`, `phoneDisplay`):** Real business calling number (e.g. `+91 98765 XXXXX`).
-- [ ] **WhatsApp Number (`whatsapp`, `whatsappDisplay`):** Real WhatsApp Business number (in international format without `+` for link generation, e.g. `9198765XXXXX`).
-- [ ] **Email Address (`email`):** Dedicated operational email address (e.g. `concierge@mycorbetttrip.com` or `bookings@mycorbetttrip.com`).
+- [x] **Phone Number (`phone`, `phoneDisplay`):** `+91 84750 87411`
+- [x] **WhatsApp Number (`whatsapp`, `whatsappDisplay`):** `918475087411` (`+91 84750 87411`)
+- [x] **Email Address (`email`):** `saleemwarsi89@gmail.com`
 - [ ] **Office Address (`address`):** Exact physical office address in Ramnagar / Uttarakhand.
 - [ ] **UTDB Registration Number (`utdbRegistrationNo`):** Official Uttarakhand Tourism Development Board registration license number. *(The trust badge in header and footer auto-hides until this is entered).*
 - [ ] **GST Identification Number (`gstin`):** 15-digit GST number. *(Auto-hides until filled).*

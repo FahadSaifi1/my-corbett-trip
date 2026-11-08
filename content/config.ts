@@ -22,11 +22,11 @@ export const businessConfig: BusinessConfig = {
   name: "My Corbett Trip",
   tagline: "Naturalist-led safaris & curated forest stays in Jim Corbett",
   domain: process.env.NEXT_PUBLIC_DOMAIN || "mycorbetttrip.com",
-  phone: process.env.NEXT_PUBLIC_PHONE || "+919876543210",
-  phoneDisplay: "+91 98765 43210",
-  whatsapp: process.env.NEXT_PUBLIC_WHATSAPP || "919876543210",
-  whatsappDisplay: "+91 98765 43210",
-  email: process.env.LEAD_NOTIFY_EMAIL || "concierge@mycorbetttrip.com",
+  phone: process.env.NEXT_PUBLIC_PHONE || "+918475087411",
+  phoneDisplay: "+91 84750 87411",
+  whatsapp: process.env.NEXT_PUBLIC_WHATSAPP || "918475087411",
+  whatsappDisplay: "+91 84750 87411",
+  email: process.env.LEAD_NOTIFY_EMAIL || "saleemwarsi89@gmail.com",
   address: "Ramnagar, Nainital District, Uttarakhand, 244715, India",
   utdbRegistrationNo: "", // Configurable; auto-hides trust badge if empty
   gstin: "", // Configurable; auto-hides if empty
