@@ -1,21 +1,31 @@
 import React from "react";
 import Link from "next/link";
 import { IconShieldCheck, IconArrowRight, IconCalendar } from "@/components/ui/CustomIcons";
+import {
+  TopographicContoursIllustration,
+  NaturalistExpeditionSeal,
+} from "@/components/illustrations/WildlifeIllustrations";
 
 export const DhikalaExplainer = () => {
   return (
-    <div className="bg-sal-forest text-cream p-6 sm:p-10 border border-cream/15">
-      <div className="max-w-4xl mx-auto">
+    <div className="relative bg-sal-forest text-cream p-5 sm:p-7 border border-cream/15 overflow-hidden">
+      {/* Background Topographic Map Texture */}
+      <TopographicContoursIllustration color="#F5F2EA" className="opacity-[0.04]" />
+      
+      {/* Vintage Expedition Seal in top corner */}
+      <NaturalistExpeditionSeal size={90} variant="ochre" className="absolute -top-3 -right-3 opacity-25 hidden sm:block" />
+
+      <div className="relative z-10 max-w-4xl mx-auto">
         <div className="flex items-center gap-2 text-xs font-mono text-tiger-ochre uppercase tracking-[0.2em] mb-2">
           <IconShieldCheck size={16} />
           <span>The Crown Jewel • Strict CTR Protocol</span>
         </div>
 
-        <h3 className="font-serif text-2xl sm:text-4xl font-bold tracking-tight text-cream mb-4">
+        <h3 className="font-serif text-2xl sm:text-4xl font-bold tracking-tight text-cream mb-3">
           Dhikala Forest Rest House: The Truth About Booking
         </h3>
 
-        <p className="text-cream/80 text-sm sm:text-base leading-relaxed mb-6">
+        <p className="text-cream/80 text-sm sm:text-base leading-relaxed mb-4">
           Dhikala is the historic epicentre of Corbett Tiger Reserve (established 1890). Because of
           its sensitive core habitat,{" "}
           <strong className="text-cream font-semibold">
@@ -24,7 +34,7 @@ export const DhikalaExplainer = () => {
           . There are only two ways to experience this landscape:
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
           {/* Method 1: Night Stay */}
           <div className="bg-cream/5 border border-cream/15 p-5">
             <span className="text-xs font-mono text-tiger-ochre uppercase tracking-wider block mb-2">

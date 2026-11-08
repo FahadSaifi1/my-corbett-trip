@@ -8,6 +8,10 @@ import { MobileStickyBar } from "@/components/layout/MobileStickyBar";
 import { PackageCard } from "@/components/modules/PackageCard";
 import { LeadForm } from "@/components/modules/LeadForm";
 import { IconShieldCheck } from "@/components/ui/CustomIcons";
+import {
+  TopographicContoursIllustration,
+  PugmarkWanderTrail,
+} from "@/components/illustrations/WildlifeIllustrations";
 
 export const metadata: Metadata = {
   title: "Jim Corbett Tour Packages & Wildlife Expeditions",
@@ -58,15 +62,19 @@ export default function PackagesPage() {
         </section>
 
         {/* Packages Grid */}
-        <section className="py-16 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+        <section className="relative py-8 sm:py-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-hidden">
+          <TopographicContoursIllustration color="#C8782A" className="opacity-20" />
+          
+          <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             {packagesData.map((pkg) => (
               <PackageCard key={pkg.slug} pkg={pkg} />
             ))}
           </div>
 
+          <PugmarkWanderTrail color="#C8782A" className="my-2" />
+
           {/* Statutory Pricing Notice */}
-          <div className="bg-cream border border-sal-forest/15 p-6 mb-16 flex items-start gap-3.5">
+          <div className="relative z-10 bg-cream border border-sal-forest/15 p-6 mb-8 flex items-start gap-3.5">
             <IconShieldCheck size={22} className="text-tiger-ochre shrink-0 mt-0.5" />
             <div className="text-xs sm:text-sm text-sal-forest/80 leading-relaxed">
               <strong className="text-sal-forest font-semibold block mb-0.5">
@@ -80,7 +88,7 @@ export default function PackagesPage() {
 
           {/* Custom Lead Form */}
           <div className="max-w-3xl mx-auto">
-            <div className="text-center mb-8">
+            <div className="text-center mb-5">
               <span className="text-xs font-mono uppercase tracking-[0.2em] text-tiger-ochre block mb-1">
                 Bespoke Planning
               </span>

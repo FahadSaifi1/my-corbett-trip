@@ -132,7 +132,7 @@ export default async function AdLandingPage({
             alt="My Corbett Trip"
             width={280}
             height={92}
-            className="h-14 sm:h-16 w-auto object-contain"
+            className="h-9 sm:h-11 w-auto object-contain"
             priority
           />
         </Link>

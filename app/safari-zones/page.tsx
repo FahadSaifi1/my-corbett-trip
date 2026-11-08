@@ -9,6 +9,10 @@ import { MobileStickyBar } from "@/components/layout/MobileStickyBar";
 import { ZoneSeasonFilter } from "@/components/modules/ZoneSeasonFilter";
 import { Badge } from "@/components/ui/Badge";
 import { IconArrowRight } from "@/components/ui/CustomIcons";
+import {
+  TopographicContoursIllustration,
+  BotanicalLeafAccent,
+} from "@/components/illustrations/WildlifeIllustrations";
 
 export const metadata: Metadata = {
   title: "Corbett Safari Zones Guide: All 8 CTR Tourism Zones Compared",
@@ -63,13 +67,15 @@ export default function SafariZonesHubPage() {
         </section>
 
         {/* Interactive Month-by-Month Filter */}
-        <section className="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="py-6 sm:py-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ZoneSeasonFilter />
         </section>
 
         {/* Complete Zone Directory */}
-        <section className="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-8">
+        <section className="relative py-6 sm:py-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-hidden">
+          <TopographicContoursIllustration color="#C8782A" className="opacity-20" />
+
+          <div className="relative z-10 mb-8">
             <span className="text-xs font-mono uppercase tracking-[0.2em] text-tiger-ochre block mb-1">
               Official Tourism Zones
             </span>
@@ -78,12 +84,18 @@ export default function SafariZonesHubPage() {
             </h2>
           </div>
 
-          <div className="space-y-6">
+          <div className="relative z-10 space-y-6">
             {ctrZones.map((zone) => (
               <div
                 key={zone.slug}
-                className="bg-cream border border-sal-forest/15 p-6 sm:p-8 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 hover:border-sal-forest transition-colors"
+                className="relative bg-cream border border-sal-forest/15 p-6 sm:p-8 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 hover:border-sal-forest hover:shadow-sm transition-all overflow-hidden group"
               >
+                <BotanicalLeafAccent
+                  size={40}
+                  color="#C8782A"
+                  className="absolute -top-1 -right-1 opacity-20 group-hover:opacity-40 transition-opacity"
+                />
+
                 <div className="max-w-3xl">
                   <div className="flex flex-wrap items-center gap-2.5 mb-2">
                     <h3 className="font-serif text-2xl font-bold text-sal-forest">
@@ -125,7 +137,7 @@ export default function SafariZonesHubPage() {
           </div>
 
           {/* Buffer & Adjacent Areas Section */}
-          <div className="mt-16 pt-12 border-t border-sal-forest/15">
+          <div className="mt-8 pt-6 border-t border-sal-forest/15">
             <div className="mb-6">
               <span className="text-xs font-mono uppercase tracking-[0.2em] text-tiger-ochre block mb-1">
                 Territorial Forest Divisions

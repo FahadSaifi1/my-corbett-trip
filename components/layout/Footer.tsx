@@ -4,27 +4,43 @@ import Image from "next/image";
 import { businessConfig } from "@/content/config";
 import { officialFees } from "@/content/fees";
 import { IconWhatsApp, IconPhone, IconShieldCheck } from "@/components/ui/CustomIcons";
+import {
+  JungleHorizonIllustration,
+  TopographicContoursIllustration,
+  NaturalistExpeditionSeal,
+} from "@/components/illustrations/WildlifeIllustrations";
 
 export const Footer = () => {
   return (
-    <footer className="bg-sal-forest text-cream border-t border-cream/10 pt-16 pb-28 sm:pb-16 text-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Mandatory Transparency Callout Box */}
-        <div className="bg-sal-forest/60 border border-cream/20 p-5 sm:p-6 mb-12">
-          <div className="flex flex-col sm:flex-row items-start gap-4">
-            <div className="p-2 bg-tiger-ochre/20 text-tiger-ochre shrink-0">
-              <IconShieldCheck size={24} />
+    <footer className="relative bg-sal-forest text-cream border-t border-cream/10 pt-0 pb-28 sm:pb-16 text-sm overflow-hidden">
+      {/* 1. Atmospheric Wildlife & Sal Forest Horizon crowning the footer */}
+      <JungleHorizonIllustration fillColor="#1F2A1F" skyGradient={true} className="-mb-1" />
+
+      {/* 2. Authentic Topographic Contours background map texture */}
+      <TopographicContoursIllustration color="#F5F2EA" className="opacity-15" />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+        {/* Mandatory Transparency Callout Box with Naturalist Seal */}
+        <div className="bg-sal-forest/70 border border-cream/20 p-5 sm:p-6 mb-12 relative overflow-hidden backdrop-blur-xs">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+            <div className="flex items-start gap-4">
+              <div className="p-2.5 bg-tiger-ochre/20 text-tiger-ochre shrink-0">
+                <IconShieldCheck size={24} />
+              </div>
+              <div>
+                <h3 className="font-serif text-base sm:text-lg text-cream mb-1 font-semibold tracking-wide">
+                  Statutory Notice & Operational Transparency
+                </h3>
+                <p className="text-cream/80 text-xs sm:text-sm leading-relaxed max-w-3xl">
+                  {businessConfig.officialPermitDisclaimer}
+                </p>
+                <p className="text-cream/60 text-xs mt-2 font-mono">
+                  {officialFees.disclaimer}
+                </p>
+              </div>
             </div>
-            <div>
-              <h3 className="font-serif text-base sm:text-lg text-cream mb-1 font-semibold tracking-wide">
-                Statutory Notice & Operational Transparency
-              </h3>
-              <p className="text-cream/80 text-xs sm:text-sm leading-relaxed">
-                {businessConfig.officialPermitDisclaimer}
-              </p>
-              <p className="text-cream/60 text-xs mt-2 font-mono">
-                {officialFees.disclaimer}
-              </p>
+            <div className="hidden lg:flex items-center shrink-0 pr-2">
+              <NaturalistExpeditionSeal size={84} variant="ochre" />
             </div>
           </div>
         </div>
@@ -33,13 +49,13 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           {/* Col 1: Brand & Philosophy */}
           <div>
-            <div className="mb-4">
+            <div className="mb-4 inline-block bg-cream px-3 py-2 rounded-xs shadow-xs">
               <Image
                 src="/Assets/logo my corbett trip.png"
                 alt="My Corbett Trip"
-                width={300}
-                height={99}
-                className="h-16 sm:h-20 w-auto object-contain brightness-110"
+                width={260}
+                height={86}
+                className="h-9 sm:h-11 w-auto object-contain"
               />
             </div>
             <p className="text-cream/70 text-xs sm:text-sm leading-relaxed mb-4">
@@ -230,6 +246,21 @@ export const Footer = () => {
               Contact
             </Link>
           </div>
+        </div>
+
+        {/* Designed & Developed by Credit */}
+        <div className="mt-6 pt-4 border-t border-cream/10 text-center text-xs text-cream/70">
+          <p>
+            Designed and Developed by{" "}
+            <a
+              href="https://portfolio-git-main-fahad-saifis-projects.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-bold text-tiger-ochre hover:text-white underline decoration-tiger-ochre/60 hover:decoration-white transition-colors"
+            >
+              Fahad Saifi
+            </a>
+          </p>
         </div>
       </div>
     </footer>

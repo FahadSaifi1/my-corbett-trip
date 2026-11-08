@@ -332,7 +332,7 @@ export default async function ZoneDetailPage({
 
             {/* Right Sticky Sidebar (4 cols) */}
             <div className="lg:col-span-4">
-              <div className="sticky top-24 space-y-6">
+              <div className="sticky top-28 space-y-4">
                 <LeadForm
                   initialInterest={`${zone.name} Safari`}
                   sourceSlug={`zone-${zone.slug}`}

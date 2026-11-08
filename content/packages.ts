@@ -10,6 +10,7 @@ export interface PackageData {
   duration: string;
   targetAudience: string;
   badge?: string;
+  heroImage?: string;
   shortSummary: string;
   highlights: string[];
   itinerary: PackageDayItinerary[];
@@ -31,6 +32,7 @@ export const packagesData: PackageData[] = [
     duration: "2 Nights / 3 Days",
     targetAudience: "Delhi-NCR families, couples, and working professionals looking for a rejuvenating weekend wilderness break.",
     badge: "Most Popular",
+    heroImage: "/Assets/corbett weekend escape.png",
     shortSummary:
       "A seamless weekend getaway from Delhi: 2 nights at a handpicked resort near Dhikuli, 2 exclusive open jeep safaris in premier CTR zones, and complete transit support.",
     highlights: [
@@ -96,6 +98,7 @@ export const packagesData: PackageData[] = [
     duration: "2 Nights / 3 Days (Inside Core Reserve)",
     targetAudience: "Discerning wildlife lovers, photographers, and adventurers who want the authentic experience of sleeping inside the deep core of Corbett Tiger Reserve.",
     badge: "Signature Expedition",
+    heroImage: "/Assets/dhikala forest lodge experience.png",
     shortSummary:
       "The ultimate Corbett immersion: stay inside the British-era Dhikala Forest Rest House (built 1890). Wake up directly on the Dhikala Chaur grasslands with exclusive morning & afternoon gypsy drives in the core.",
     highlights: [
@@ -159,6 +162,7 @@ export const packagesData: PackageData[] = [
     duration: "3 Nights / 4 Days",
     targetAudience: "Luxury travellers, couples, and executives seeking five-star lodge hospitality, private naturalists, and serene Kosi river frontage.",
     badge: "Boutique Luxury",
+    heroImage: "/Assets/riverside luxury retreat.png",
     shortSummary:
       "Combines luxury lodge comfort along the clear waters of the Kosi river with 3 private, bespoke jeep safaris guided by an experienced naturalist.",
     highlights: [
@@ -220,6 +224,7 @@ export const packagesData: PackageData[] = [
     title: "Family Safari Holiday",
     duration: "3 Nights / 4 Days",
     targetAudience: "Families with children and multi-generational groups looking for a balanced, kid-friendly blend of wildlife safaris and local cultural heritage.",
+    heroImage: "/Assets/family safari holiday.png",
     shortSummary:
       "A thoughtfully paced family vacation: 2 safari drives, heritage visits to Corbett Museum in Kaladhungi, Garjiya Devi Temple, and Corbett Falls, with family suites.",
     highlights: [

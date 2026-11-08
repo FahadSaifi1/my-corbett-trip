@@ -15,6 +15,11 @@ import {
   IconIdCard,
   IconPhoneBan,
 } from "@/components/ui/CustomIcons";
+import {
+  TopographicContoursIllustration,
+  TigerWatermarkIllustration,
+  PugmarkWanderTrail,
+} from "@/components/illustrations/WildlifeIllustrations";
 
 export const metadata: Metadata = {
   title: "Jim Corbett Jeep Safari Booking, Price & Zones (2026)",
@@ -88,9 +93,11 @@ export default function JeepSafariPage() {
         </section>
 
         {/* Content & Calculator */}
-        <section className="py-12 sm:py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+        <section className="relative py-8 sm:py-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10 overflow-hidden">
+          <TopographicContoursIllustration color="#1F2A1F" className="opacity-[0.04]" />
+          
           {/* Key Facts Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="bg-cream border border-sal-forest/15 p-6">
               <div className="w-10 h-10 bg-sal-forest/10 text-sal-forest flex items-center justify-center mb-3">
                 <IconGypsy size={22} />
@@ -132,13 +139,20 @@ export default function JeepSafariPage() {
           </div>
 
           {/* Interactive Calculator */}
-          <div>
+          <div className="relative z-10">
             <SafariCostCalculator />
           </div>
 
+          <PugmarkWanderTrail color="#C8782A" className="my-6" />
+
           {/* Mandatory Transparency Notice */}
-          <div className="bg-cream border border-sal-forest/15 p-6">
-            <div className="flex items-start gap-3">
+          <div className="relative z-10 bg-cream border border-sal-forest/15 p-6 overflow-hidden">
+            <TigerWatermarkIllustration
+              size={280}
+              color="#1F2A1F"
+              className="absolute -right-8 -bottom-6 opacity-[0.06] hidden sm:block"
+            />
+            <div className="relative z-10 flex items-start gap-3">
               <IconShieldCheck size={24} className="text-tiger-ochre shrink-0 mt-0.5" />
               <div>
                 <h4 className="font-serif text-base font-bold text-sal-forest mb-1">

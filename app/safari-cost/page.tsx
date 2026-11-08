@@ -10,6 +10,11 @@ import { SafariCostCalculator } from "@/components/modules/SafariCostCalculator"
 import { LeadForm } from "@/components/modules/LeadForm";
 import { FaqAccordion } from "@/components/modules/FaqAccordion";
 import { IconShieldCheck } from "@/components/ui/CustomIcons";
+import {
+  TopographicContoursIllustration,
+  TigerWatermarkIllustration,
+  NaturalistExpeditionSeal,
+} from "@/components/illustrations/WildlifeIllustrations";
 
 export const metadata: Metadata = {
   title: "Jim Corbett Safari Cost & Official Permit Prices (2026–27)",
@@ -77,24 +82,36 @@ export default function SafariCostPage() {
           </div>
         </section>
 
-        <section className="py-12 sm:py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
-          {/* Statutory Verification Box */}
-          <div className="bg-cream border border-sal-forest/15 p-6 flex items-start gap-3.5">
-            <IconShieldCheck size={24} className="text-tiger-ochre shrink-0 mt-0.5" />
-            <div className="text-xs sm:text-sm text-sal-forest/80 leading-relaxed">
-              <p className="font-semibold text-sal-forest mb-1">
-                Official CTR Fee Verification Status:
-              </p>
-              <p>{officialFees.disclaimer}</p>
-              <p className="mt-1">{businessConfig.officialPermitDisclaimer}</p>
+        <section className="relative py-8 sm:py-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10 overflow-hidden">
+          <TopographicContoursIllustration color="#C8782A" className="opacity-20" />
+
+          {/* Statutory Verification Box with Expedition Seal */}
+          <div className="relative z-10 bg-cream border border-sal-forest/15 p-6 flex items-start justify-between gap-4 overflow-hidden">
+            <div className="flex items-start gap-3.5">
+              <IconShieldCheck size={24} className="text-tiger-ochre shrink-0 mt-0.5" />
+              <div className="text-xs sm:text-sm text-sal-forest/80 leading-relaxed">
+                <p className="font-semibold text-sal-forest mb-1">
+                  Official CTR Fee Verification Status:
+                </p>
+                <p>{officialFees.disclaimer}</p>
+                <p className="mt-1">{businessConfig.officialPermitDisclaimer}</p>
+              </div>
             </div>
+            <NaturalistExpeditionSeal size={74} variant="ochre" className="shrink-0 hidden md:block" />
           </div>
 
           {/* Interactive Calculator */}
-          <SafariCostCalculator />
+          <div className="relative z-10">
+            <SafariCostCalculator />
+          </div>
 
           {/* Transparent Two-Column Ledger Explainer */}
-          <div className="bg-white border border-sal-forest/15 p-6 sm:p-8 space-y-6">
+          <div className="relative z-10 bg-white border border-sal-forest/15 p-6 sm:p-8 space-y-6 overflow-hidden">
+            <TigerWatermarkIllustration
+              size={320}
+              color="#C8782A"
+              className="absolute -right-10 -bottom-8 opacity-[0.07] hidden sm:block"
+            />
             <h2 className="font-serif text-2xl font-bold text-sal-forest">
               Understanding the Two Components of Your Trip Cost
             </h2>

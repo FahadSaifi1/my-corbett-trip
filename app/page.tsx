@@ -15,9 +15,20 @@ import { LeadForm } from "@/components/modules/LeadForm";
 import { ZoneSeasonFilter } from "@/components/modules/ZoneSeasonFilter";
 import { DhikalaExplainer } from "@/components/modules/DhikalaExplainer";
 import { PackageCard } from "@/components/modules/PackageCard";
+import { InteractiveWildlifeTracker } from "@/components/modules/InteractiveWildlifeTracker";
 import { FaqAccordion } from "@/components/modules/FaqAccordion";
 import { SafeSection } from "@/components/ui/SafeSection";
 import { Badge } from "@/components/ui/Badge";
+import {
+  TopographicContoursIllustration,
+  TigerWatermarkIllustration,
+  ElephantWatermarkIllustration,
+  DeerWatermarkIllustration,
+  JungleFoliageWatermark,
+  NaturalistExpeditionSeal,
+  BotanicalLeafAccent,
+  PugmarkWanderTrail,
+} from "@/components/illustrations/WildlifeIllustrations";
 import {
   IconPugmark,
   IconGypsy,
@@ -82,8 +93,8 @@ export default function HomePage() {
       <Navbar />
 
       <main className="flex-1">
-        {/* 1. HERO SECTION */}
-        <section className="relative bg-sal-forest text-cream overflow-hidden border-b border-sal-forest/20">
+        {/* 1. HERO SECTION (Full-Screen Viewport Coverage) */}
+        <section className="relative min-h-[calc(100svh-88px)] sm:min-h-[calc(100vh-104px)] flex flex-col justify-center bg-sal-forest text-cream overflow-hidden border-b border-sal-forest/20">
           <div className="absolute inset-0 -z-0">
             <Image
               src="/Assets/homepage tiger banner.png"
@@ -98,7 +109,7 @@ export default function HomePage() {
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/15" />
           </div>
 
-          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-20 sm:pt-24 sm:pb-28">
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 w-full">
             <div className="max-w-3xl drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]">
               <div className="inline-flex items-center gap-2 px-3 py-1 bg-cream/10 border border-cream/20 text-cream/90 text-xs font-mono uppercase tracking-[0.2em] mb-6">
                 <IconPugmark size={14} className="text-tiger-ochre" />
@@ -149,8 +160,9 @@ export default function HomePage() {
         </section>
 
         {/* 2. QUICK PLANNER STRIP */}
-        <section className="bg-cream border-b border-sal-forest/15 py-6">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="relative bg-cream border-b border-sal-forest/15 py-3.5 sm:py-4 overflow-hidden">
+          <TopographicContoursIllustration color="#1F2A1F" className="opacity-[0.035]" />
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
               <div className="flex items-center gap-3">
                 <div className="p-2.5 bg-sal-forest text-cream shrink-0">
@@ -207,32 +219,76 @@ export default function HomePage() {
         </section>
 
         {/* 3. INTERACTIVE ZONE NAVIGATOR ("Which zone for your dates?") */}
-        <section className="py-16 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ZoneSeasonFilter />
+        <section className="relative pt-6 pb-8 sm:pt-8 sm:pb-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-hidden">
+          {/* Rich Topographic Surveyor Elevation Contours */}
+          <TopographicContoursIllustration color="#C8782A" className="opacity-20" />
+          
+          {/* Left Margin Elephant Family Watermark */}
+          <ElephantWatermarkIllustration
+            className="absolute -left-12 -bottom-6 opacity-25 hidden xl:block"
+            color="#C8782A"
+            size={360}
+          />
+
+          {/* Right Margin Spotted Deer Stag Watermark */}
+          <DeerWatermarkIllustration
+            className="absolute -right-8 -top-4 opacity-25 hidden xl:block"
+            color="#C8782A"
+            size={240}
+          />
+
+          {/* Corner Jungle Foliage Branches */}
+          <JungleFoliageWatermark side="left" className="absolute -left-8 -top-8 opacity-25 hidden md:block" color="#1F2A1F" size={200} />
+          <JungleFoliageWatermark side="right" className="absolute -right-8 -bottom-8 opacity-25 hidden md:block" color="#1F2A1F" size={200} />
+
+          <div className="relative z-10">
+            <ZoneSeasonFilter />
+          </div>
         </section>
 
-        {/* 4. FOUR SIGNATURE PACKAGES (Editorial Layout) */}
-        <section className="py-16 sm:py-20 bg-cream/50 border-y border-sal-forest/15">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 pb-4 border-b border-sal-forest/10">
+        {/* Illustrated Tiger Pugmark Wander Trail */}
+        <PugmarkWanderTrail color="#C8782A" className="my-0" />
+
+        {/* 4. FOUR SIGNATURE PACKAGES (Editorial Layout with rich visual photo cards & interactive tabs) */}
+        <section className="relative py-6 sm:py-10 bg-gradient-to-b from-cream via-cream/80 to-cream border-y border-sal-forest/15 overflow-hidden">
+          <TopographicContoursIllustration color="#C8782A" className="opacity-20" />
+          <TigerWatermarkIllustration
+            className="absolute -right-16 -bottom-12 opacity-25 hidden md:block"
+            color="#C8782A"
+            size={400}
+          />
+          <ElephantWatermarkIllustration
+            className="absolute -left-14 -bottom-8 opacity-20 hidden xl:block"
+            color="#C8782A"
+            size={340}
+          />
+
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 pb-3 border-b border-sal-forest/15">
               <div>
-                <span className="text-xs font-mono uppercase tracking-[0.2em] text-tiger-ochre block mb-1">
-                  Signature Expeditions
-                </span>
-                <h2 className="font-serif text-3xl sm:text-4xl font-bold text-sal-forest">
+                <div className="flex items-center gap-2 mb-1.5">
+                  <BotanicalLeafAccent size={22} color="#C8782A" />
+                  <span className="text-xs font-mono uppercase tracking-[0.25em] text-tiger-ochre font-bold">
+                    Signature Expeditions
+                  </span>
+                </div>
+                <h2 className="font-serif text-3xl sm:text-5xl font-bold text-sal-forest">
                   Handcrafted Corbett Itineraries
                 </h2>
+                <p className="text-xs sm:text-sm text-sal-forest/80 mt-1 max-w-xl">
+                  Curated wilderness stays with official CTR safari permits included in your name. Explore highlights, inclusions, and day 1 previews directly on each card.
+                </p>
               </div>
               <Link
                 href="/packages"
-                className="inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-sal-forest hover:text-tiger-ochre transition-colors"
+                className="inline-flex items-center gap-2 py-2.5 px-4 bg-sal-forest hover:bg-tiger-ochre text-cream text-xs font-medium uppercase tracking-wider transition-colors shadow-xs"
               >
                 <span>Browse All 10 Packages</span>
                 <IconArrowRight size={14} />
               </Link>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {signaturePackages.map((pkg) => (
                 <PackageCard key={pkg.slug} pkg={pkg} />
               ))}
@@ -240,10 +296,32 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* 5. TRANSPARENT PRICING EXPLAINER: CTR Fees vs Concierge Fee */}
-        <section className="py-16 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-cream border border-sal-forest/15 p-6 sm:p-10">
-            <div className="max-w-3xl mb-8">
+        {/* Trail separator leading to Wildlife Tracker */}
+        <PugmarkWanderTrail color="#C8782A" className="my-0" />
+
+        {/* 5. INTERACTIVE CORBETT BIG 5 WILDLIFE RADAR */}
+        <section className="relative py-8 sm:py-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-hidden">
+          <TopographicContoursIllustration color="#C8782A" className="opacity-20" />
+          <TigerWatermarkIllustration
+            className="absolute -left-16 -bottom-6 opacity-20 hidden lg:block"
+            color="#C8782A"
+            size={360}
+          />
+          <JungleFoliageWatermark side="right" className="absolute -right-8 -top-6 opacity-20 hidden md:block" color="#1F2A1F" size={200} />
+          <div className="relative z-10">
+            <InteractiveWildlifeTracker />
+          </div>
+        </section>
+
+        {/* Trail separator */}
+        <PugmarkWanderTrail color="#C8782A" className="my-0" />
+
+        {/* 6. TRANSPARENT PRICING EXPLAINER: CTR Fees vs Concierge Fee */}
+        <section className="py-6 sm:py-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="relative bg-cream border border-sal-forest/20 p-5 sm:p-7 overflow-hidden shadow-xs">
+            <TopographicContoursIllustration color="#C8782A" className="opacity-20" />
+
+            <div className="relative z-10 max-w-3xl mb-5">
               <span className="text-xs font-mono uppercase tracking-[0.2em] text-tiger-ochre block mb-1">
                 Zero Hidden Charges
               </span>
@@ -257,9 +335,9 @@ export default function HomePage() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Column 1: Government Statutory Fees */}
-              <div className="bg-white border border-sal-forest/15 p-6">
+              <div className="bg-white border border-sal-forest/15 p-6 relative overflow-hidden">
                 <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-sal-forest/70 mb-2">
                   <IconShieldCheck size={16} className="text-sal-forest" />
                   <span>Column 1: What You Pay Official CTR</span>
@@ -295,15 +373,27 @@ export default function HomePage() {
               </div>
 
               {/* Column 2: What You Pay Us */}
-              <div className="bg-sal-forest text-cream p-6">
-                <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-tiger-ochre mb-2">
+              <div className="bg-sal-forest text-cream p-6 relative overflow-hidden">
+                {/* Subtle Tiger silhouette watermark & seal */}
+                <TigerWatermarkIllustration
+                  className="absolute -right-4 -bottom-6 opacity-30"
+                  color="#C8782A"
+                  size={240}
+                />
+                <NaturalistExpeditionSeal
+                  size={76}
+                  variant="ochre"
+                  className="absolute top-4 right-4 opacity-50 hidden sm:block"
+                />
+
+                <div className="relative z-10 flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-tiger-ochre mb-2">
                   <IconPugmark size={16} />
                   <span>Column 2: What You Pay My Corbett Trip</span>
                 </div>
-                <h3 className="font-serif text-xl font-bold text-cream mb-4">
+                <h3 className="relative z-10 font-serif text-xl font-bold text-cream mb-4">
                   Our Curation & Concierge Fee
                 </h3>
-                <ul className="space-y-3 text-xs sm:text-sm text-cream/85">
+                <ul className="relative z-10 space-y-3 text-xs sm:text-sm text-cream/85">
                   <li className="flex items-start gap-2">
                     <span className="text-tiger-ochre">✓</span>
                     <span>Permit Clock Monitoring: We track the exact second rolling windows open.</span>
@@ -321,7 +411,7 @@ export default function HomePage() {
                     <span>Doorstep Resort Coordination: Gypsies arrive directly at your hotel lobby.</span>
                   </li>
                 </ul>
-                <div className="mt-6 pt-4 border-t border-cream/15">
+                <div className="relative z-10 mt-6 pt-4 border-t border-cream/15">
                   <Link
                     href="/safari-cost"
                     className="inline-flex items-center gap-2 text-xs uppercase tracking-wider font-medium text-tiger-ochre hover:text-white transition-colors"
@@ -335,17 +425,20 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* Trail separator */}
+        <PugmarkWanderTrail color="#C8782A" className="my-0" />
+
         {/* 6. DHIKALA NIGHT-STAY FEATURE */}
-        <section className="py-16 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="py-6 sm:py-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <DhikalaExplainer />
         </section>
 
         {/* 7. HANDPICKED STAYS (Honesty rule: SafeSection auto-hides if array empty) */}
         <SafeSection data={partnerStays}>
           {(stays) => (
-            <section className="py-16 sm:py-20 bg-cream/50 border-y border-sal-forest/15">
+            <section className="py-6 sm:py-8 bg-cream/50 border-y border-sal-forest/15">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="mb-8">
+                <div className="mb-6">
                   <span className="text-xs font-mono uppercase tracking-[0.2em] text-tiger-ochre block mb-1">
                     Verified Lodgings
                   </span>
@@ -369,8 +462,8 @@ export default function HomePage() {
         {/* 8. THE TEAM (Honesty rule: SafeSection auto-hides until real bios exist) */}
         <SafeSection data={teamMembers}>
           {(members) => (
-            <section className="py-16 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="mb-8">
+            <section className="py-6 sm:py-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="mb-6">
                 <span className="text-xs font-mono uppercase tracking-[0.2em] text-tiger-ochre block mb-1">
                   Local Roots
                 </span>
@@ -393,9 +486,9 @@ export default function HomePage() {
         {/* 9. REVIEWS (Honesty rule: SafeSection auto-hides until real reviews added) */}
         <SafeSection data={reviews}>
           {(reviewList) => (
-            <section className="py-16 sm:py-20 bg-cream border-y border-sal-forest/15">
+            <section className="py-6 sm:py-8 bg-cream border-y border-sal-forest/15">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="mb-8">
+                <div className="mb-6">
                   <h2 className="font-serif text-3xl font-bold text-sal-forest">
                     Guest Field Logbook
                   </h2>
@@ -414,8 +507,16 @@ export default function HomePage() {
         </SafeSection>
 
         {/* 10. KNOW BEFORE YOU GO: 2026 Core Rules Strip */}
-        <section className="py-16 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-10 text-center max-w-2xl mx-auto">
+        <section className="relative py-8 sm:py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-hidden">
+          <TopographicContoursIllustration color="#C8782A" className="opacity-15" />
+          <DeerWatermarkIllustration
+            className="absolute -right-8 -bottom-6 opacity-20 hidden lg:block"
+            color="#C8782A"
+            size={240}
+          />
+          <JungleFoliageWatermark side="left" className="absolute -left-8 -top-8 opacity-20 hidden md:block" color="#1F2A1F" size={200} />
+
+          <div className="relative z-10 mb-6 text-center max-w-2xl mx-auto">
             <span className="text-xs font-mono uppercase tracking-[0.2em] text-tiger-ochre block mb-1">
               Important Directives
             </span>
@@ -428,9 +529,14 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Rule 1: Mobile Ban */}
-            <div className="bg-cream border border-sal-forest/15 p-6 flex flex-col justify-between">
+            <div className="relative bg-cream border border-sal-forest/15 p-6 flex flex-col justify-between overflow-hidden group hover:border-sal-forest transition-colors">
+              <BotanicalLeafAccent
+                size={36}
+                color="#C8782A"
+                className="absolute -top-1 -right-1 opacity-20 group-hover:opacity-40 transition-opacity"
+              />
               <div>
                 <div className="w-12 h-12 bg-tiger-ochre/15 text-tiger-ochre flex items-center justify-center mb-4">
                   <IconPhoneBan size={24} />
@@ -453,7 +559,12 @@ export default function HomePage() {
             </div>
 
             {/* Rule 2: Dual ID check */}
-            <div className="bg-cream border border-sal-forest/15 p-6 flex flex-col justify-between">
+            <div className="relative bg-cream border border-sal-forest/15 p-6 flex flex-col justify-between overflow-hidden group hover:border-sal-forest transition-colors">
+              <BotanicalLeafAccent
+                size={36}
+                color="#C8782A"
+                className="absolute -top-1 -right-1 opacity-20 group-hover:opacity-40 transition-opacity"
+              />
               <div>
                 <div className="w-12 h-12 bg-sal-forest/10 text-sal-forest flex items-center justify-center mb-4">
                   <IconIdCard size={24} />
@@ -475,7 +586,12 @@ export default function HomePage() {
             </div>
 
             {/* Rule 3: Zero Plastic */}
-            <div className="bg-cream border border-sal-forest/15 p-6 flex flex-col justify-between">
+            <div className="relative bg-cream border border-sal-forest/15 p-6 flex flex-col justify-between overflow-hidden group hover:border-sal-forest transition-colors">
+              <BotanicalLeafAccent
+                size={36}
+                color="#C8782A"
+                className="absolute -top-1 -right-1 opacity-20 group-hover:opacity-40 transition-opacity"
+              />
               <div>
                 <div className="w-12 h-12 bg-mist/40 text-sal-forest flex items-center justify-center mb-4">
                   <IconShieldCheck size={24} />
@@ -497,7 +613,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="text-center mt-8">
+          <div className="text-center mt-6">
             <Link
               href="/safari-rules"
               className="inline-flex items-center gap-1.5 text-xs uppercase tracking-wider font-medium text-sal-forest hover:text-tiger-ochre transition-colors"
@@ -509,28 +625,54 @@ export default function HomePage() {
         </section>
 
         {/* 11. FAQ SECTION */}
-        <section className="py-16 sm:py-20 bg-cream/40 border-y border-sal-forest/15">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="relative py-8 sm:py-12 bg-cream/40 border-y border-sal-forest/15 overflow-hidden">
+          <TopographicContoursIllustration color="#C8782A" className="opacity-20" />
+          <ElephantWatermarkIllustration
+            className="absolute -right-12 -bottom-6 opacity-20 hidden lg:block"
+            color="#C8782A"
+            size={360}
+          />
+          <JungleFoliageWatermark side="left" className="absolute -left-8 -top-8 opacity-20 hidden md:block" color="#1F2A1F" size={220} />
+          <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <FaqAccordion items={HOME_FAQS} />
           </div>
         </section>
 
-        {/* 12. FINAL CTA WITH LEAD FORM */}
-        <section className="py-20 sm:py-28 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-10">
-            <span className="text-xs font-mono uppercase tracking-[0.2em] text-tiger-ochre block mb-2">
-              Start Your Journey
-            </span>
-            <h2 className="font-serif text-3xl sm:text-5xl font-bold text-sal-forest mb-4">
-              Plan Your Corbett Expedition
-            </h2>
-            <p className="text-xs sm:text-base text-sal-forest/80 max-w-xl mx-auto leading-relaxed">
-              Tell us your preferred dates and group size. Our local naturalists will verify
-              official CTR gate availability and send a customized itinerary.
-            </p>
-          </div>
+        {/* Trail leading to final expedition planner */}
+        <PugmarkWanderTrail color="#C8782A" className="my-0" />
 
-          <LeadForm sourceSlug="homepage-final-cta" />
+        {/* 12. FINAL CTA WITH LEAD FORM (Illustrated Explorer's Pavilion) */}
+        <section className="py-8 sm:py-12 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="relative bg-gradient-to-b from-cream via-cream/95 to-cream border border-sal-forest/25 p-6 sm:p-8 shadow-md overflow-hidden">
+            {/* Background illustrations with rich visibility */}
+            <TopographicContoursIllustration color="#C8782A" className="opacity-20" />
+            <TigerWatermarkIllustration
+              className="absolute -right-16 -bottom-10 opacity-25 hidden sm:block"
+              color="#C8782A"
+              size={400}
+            />
+
+            <div className="relative z-10">
+              <div className="text-center mb-6 max-w-2xl mx-auto">
+                <div className="flex items-center justify-center gap-2 mb-3">
+                  <BotanicalLeafAccent size={24} color="#C8782A" direction="left" />
+                  <span className="text-xs font-mono uppercase tracking-[0.25em] text-tiger-ochre font-semibold">
+                    Start Your Expedition
+                  </span>
+                  <BotanicalLeafAccent size={24} color="#C8782A" direction="right" />
+                </div>
+                <h2 className="font-serif text-3xl sm:text-5xl font-bold text-sal-forest mb-4">
+                  Plan Your Corbett Safari & Stay
+                </h2>
+                <p className="text-xs sm:text-base text-sal-forest/80 leading-relaxed">
+                  Tell us your preferred dates and group size. Our local naturalists will verify
+                  official CTR gate availability and send a customized itinerary within 15 minutes.
+                </p>
+              </div>
+
+              <LeadForm sourceSlug="homepage-final-cta" />
+            </div>
+          </div>
         </section>
       </main>
 

@@ -5,6 +5,11 @@ import Link from "next/link";
 import { safariZones } from "@/content/zones";
 import { Badge } from "@/components/ui/Badge";
 import { IconArrowRight } from "@/components/ui/CustomIcons";
+import {
+  TopographicContoursIllustration,
+  BotanicalLeafAccent,
+  NaturalistExpeditionSeal,
+} from "@/components/illustrations/WildlifeIllustrations";
 
 const MONTHS = [
   { num: 10, label: "Oct", full: "October" },
@@ -32,12 +37,22 @@ export const ZoneSeasonFilter = () => {
   const closedZones = safariZones.filter((z) => !z.openMonths.includes(selectedMonth));
 
   return (
-    <div className="bg-cream border border-sal-forest/15 p-6 sm:p-8">
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 pb-5 border-b border-sal-forest/10">
+    <div className="relative bg-cream border border-sal-forest/15 p-4 sm:p-6 overflow-hidden shadow-xs">
+      <TopographicContoursIllustration color="#C8782A" className="opacity-15" />
+      <NaturalistExpeditionSeal
+        size={76}
+        variant="ochre"
+        className="absolute top-3 right-4 opacity-30 hidden sm:block pointer-events-none"
+      />
+
+      <div className="relative z-10 flex flex-col md:flex-row md:items-end justify-between gap-4 mb-4 pb-3 border-b border-sal-forest/10">
         <div>
-          <span className="text-xs uppercase font-mono tracking-[0.2em] text-tiger-ochre block mb-1">
-            Seasonal Gate Calendar
-          </span>
+          <div className="flex items-center gap-1.5 mb-1">
+            <BotanicalLeafAccent size={18} color="#C8782A" />
+            <span className="text-xs uppercase font-mono tracking-[0.2em] text-tiger-ochre block font-semibold">
+              Seasonal Gate Calendar
+            </span>
+          </div>
           <h3 className="font-serif text-2xl sm:text-3xl font-bold text-sal-forest">
             Which Zone Is Open For Your Dates?
           </h3>
@@ -49,7 +64,7 @@ export const ZoneSeasonFilter = () => {
       </div>
 
       {/* Month Pills Selector */}
-      <div className="flex items-center gap-1.5 overflow-x-auto pb-3 mb-6 scrollbar-none">
+      <div className="relative z-10 flex items-center gap-1.5 overflow-x-auto pb-2 mb-4 scrollbar-none">
         {MONTHS.map((m) => {
           const isActive = m.num === selectedMonth;
           return (
@@ -69,7 +84,7 @@ export const ZoneSeasonFilter = () => {
         })}
       </div>
 
-      <div className="mb-4">
+      <div className="relative z-10 mb-4">
         <span className="text-xs font-mono text-sal-forest/70">
           Showing <span className="font-bold text-sal-forest">{openZones.length} zones</span>{" "}
           operational in <span className="font-bold text-sal-forest">{activeMonthObj.full}</span>:
@@ -77,7 +92,7 @@ export const ZoneSeasonFilter = () => {
       </div>
 
       {/* Zone Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {openZones.map((zone) => (
           <div
             key={zone.slug}

@@ -9,6 +9,11 @@ import { MobileStickyBar } from "@/components/layout/MobileStickyBar";
 import { LeadForm } from "@/components/modules/LeadForm";
 import { FaqAccordion } from "@/components/modules/FaqAccordion";
 import { Badge } from "@/components/ui/Badge";
+import {
+  TopographicContoursIllustration,
+  NaturalistExpeditionSeal,
+  PugmarkWanderTrail,
+} from "@/components/illustrations/WildlifeIllustrations";
 import { IconShieldCheck } from "@/components/ui/CustomIcons";
 
 export const metadata: Metadata = {
@@ -84,16 +89,19 @@ export default function DhikalaNightStayPage() {
         </section>
 
         {/* Content & Roadmap */}
-        <section className="py-12 sm:py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+        <section className="relative py-8 sm:py-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10 overflow-hidden">
+          <TopographicContoursIllustration color="#C8782A" className="opacity-20" />
+
           {/* 45-Day Advance Booking Window Roadmap */}
-          <div className="bg-cream border border-sal-forest/15 p-6 sm:p-8">
+          <div className="relative z-10 bg-cream border border-sal-forest/15 p-6 sm:p-8 overflow-hidden">
+            <NaturalistExpeditionSeal size={90} variant="ochre" className="absolute -top-3 -right-3 opacity-25 hidden sm:block" />
             <span className="text-xs font-mono uppercase tracking-[0.2em] text-tiger-ochre block mb-2">
               The 45-Day Booking Window
             </span>
             <h2 className="font-serif text-2xl sm:text-3xl font-bold text-sal-forest mb-4">
               How to Secure an Overnight Permit
             </h2>
-            <p className="text-xs sm:text-sm text-sal-forest/80 leading-relaxed mb-8 max-w-3xl">
+            <p className="text-xs sm:text-sm text-sal-forest/80 leading-relaxed mb-5 max-w-3xl">
               With fewer than 30 guest rooms in the entire complex, Dhikala permits are the most
               coveted wilderness tickets in India. We do not invent fake scarcity; here is the
               factual reality of how the government booking calendar operates:
@@ -140,6 +148,8 @@ export default function DhikalaNightStayPage() {
               </div>
             </div>
           </div>
+
+          <PugmarkWanderTrail color="#C8782A" className="my-2" />
 
           {/* Rest House Compounds */}
           <div className="space-y-6">
@@ -234,7 +244,7 @@ export default function DhikalaNightStayPage() {
 
           {/* Lead Form */}
           <div className="max-w-3xl mx-auto">
-            <div className="text-center mb-8">
+            <div className="text-center mb-5">
               <span className="text-xs font-mono uppercase tracking-[0.2em] text-tiger-ochre block mb-1">
                 Enquire for 45-Day Window
               </span>

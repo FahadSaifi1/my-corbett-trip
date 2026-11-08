@@ -7,6 +7,11 @@ import { Footer } from "@/components/layout/Footer";
 import { MobileStickyBar } from "@/components/layout/MobileStickyBar";
 import { LeadForm } from "@/components/modules/LeadForm";
 import { Badge } from "@/components/ui/Badge";
+import {
+  TopographicContoursIllustration,
+  BotanicalLeafAccent,
+  NaturalistExpeditionSeal,
+} from "@/components/illustrations/WildlifeIllustrations";
 
 export const metadata: Metadata = {
   title: "Corbett Safari Rules 2026: Mobile Phone Ban, ID Checks & Gate Guidelines",
@@ -57,13 +62,20 @@ export default function SafariRulesPage() {
         </section>
 
         {/* Rules Grid */}
-        <section className="py-12 sm:py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <section className="relative py-8 sm:py-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 overflow-hidden">
+          <TopographicContoursIllustration color="#1F2A1F" className="opacity-[0.04]" />
+
+          <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-8">
             {corbettRules2026.map((rule) => (
               <div
                 key={rule.id}
-                className="bg-cream border border-sal-forest/15 p-6 sm:p-7 flex flex-col justify-between"
+                className="relative bg-cream border border-sal-forest/15 p-6 sm:p-7 flex flex-col justify-between overflow-hidden group hover:border-sal-forest transition-colors"
               >
+                <BotanicalLeafAccent
+                  size={36}
+                  color="#C8782A"
+                  className="absolute -top-1 -right-1 opacity-20 group-hover:opacity-40 transition-opacity"
+                />
                 <div>
                   <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
                     <Badge variant={rule.id === "phone-ban" ? "ochre" : "forest"}>
@@ -94,8 +106,14 @@ export default function SafariRulesPage() {
           </div>
 
           {/* Gate Verification Checklist */}
-          <div className="bg-sal-forest text-cream p-6 sm:p-10 space-y-6">
-            <div className="max-w-3xl">
+          <div className="relative z-10 bg-sal-forest text-cream p-6 sm:p-10 space-y-6 overflow-hidden">
+            <TopographicContoursIllustration color="#F5F2EA" className="opacity-[0.035]" />
+            <NaturalistExpeditionSeal
+              size={86}
+              variant="ochre"
+              className="absolute -top-2 -right-2 opacity-30 hidden sm:block"
+            />
+            <div className="relative z-10 max-w-3xl">
               <span className="text-xs font-mono uppercase tracking-[0.2em] text-tiger-ochre block mb-1">
                 Gate Entry Protocol
               </span>

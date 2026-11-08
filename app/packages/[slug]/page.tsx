@@ -107,7 +107,7 @@ export default async function PackageDetailPage({
         <section className="relative bg-sal-forest text-cream py-12 sm:py-16 border-b border-sal-forest/20 overflow-hidden">
           <div className="absolute inset-0 -z-0">
             <Image
-              src="/Assets/packages banner.png"
+              src={pkg.heroImage || "/Assets/packages banner.png"}
               alt={pkg.title}
               fill
               priority
@@ -268,7 +268,7 @@ export default async function PackageDetailPage({
 
             {/* Sticky Sidebar Form (4 cols) */}
             <div className="lg:col-span-4">
-              <div className="sticky top-24 space-y-6">
+              <div className="sticky top-28 space-y-4">
                 <LeadForm
                   initialInterest={pkg.title}
                   sourceSlug={`package-${pkg.slug}`}
