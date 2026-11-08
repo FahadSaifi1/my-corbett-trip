@@ -1,6 +1,5 @@
 import React from "react";
 import type { Metadata } from "next";
-import Link from "next/link";
 import Image from "next/image";
 import { businessConfig } from "@/content/config";
 import { officialFees } from "@/content/fees";
@@ -10,13 +9,7 @@ import { MobileStickyBar } from "@/components/layout/MobileStickyBar";
 import { LeadForm } from "@/components/modules/LeadForm";
 import { FaqAccordion } from "@/components/modules/FaqAccordion";
 import { Badge } from "@/components/ui/Badge";
-import {
-  IconCanter,
-  IconShieldCheck,
-  IconCheck,
-  IconCalendar,
-  IconArrowRight,
-} from "@/components/ui/CustomIcons";
+import { IconShieldCheck } from "@/components/ui/CustomIcons";
 
 export const metadata: Metadata = {
   title: "Dhikala Canter Safari Booking, Price & Timings (2026)",

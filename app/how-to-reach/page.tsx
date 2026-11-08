@@ -1,14 +1,10 @@
 import React from "react";
 import type { Metadata } from "next";
-import Link from "next/link";
 import Image from "next/image";
-import { businessConfig } from "@/content/config";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { MobileStickyBar } from "@/components/layout/MobileStickyBar";
 import { LeadForm } from "@/components/modules/LeadForm";
-import { Badge } from "@/components/ui/Badge";
-import { IconCompass, IconArrowRight, IconShieldCheck } from "@/components/ui/CustomIcons";
 
 export const metadata: Metadata = {
   title: "How to Reach Jim Corbett from Delhi: Road, Train & Flight Guide",

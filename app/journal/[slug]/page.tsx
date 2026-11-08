@@ -10,7 +10,7 @@ import { Footer } from "@/components/layout/Footer";
 import { MobileStickyBar } from "@/components/layout/MobileStickyBar";
 import { LeadForm } from "@/components/modules/LeadForm";
 import { Badge } from "@/components/ui/Badge";
-import { IconArrowRight, IconShieldCheck } from "@/components/ui/CustomIcons";
+import { IconShieldCheck } from "@/components/ui/CustomIcons";
 
 export async function generateStaticParams() {
   return journalArticles.map((article) => ({

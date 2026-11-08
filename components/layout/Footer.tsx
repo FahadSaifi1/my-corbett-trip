@@ -37,9 +37,9 @@ export const Footer = () => {
               <Image
                 src="/Assets/logo my corbett trip.png"
                 alt="My Corbett Trip"
-                width={180}
-                height={89}
-                className="h-11 sm:h-12 w-auto object-contain brightness-110"
+                width={300}
+                height={99}
+                className="h-16 sm:h-20 w-auto object-contain brightness-110"
               />
             </div>
             <p className="text-cream/70 text-xs sm:text-sm leading-relaxed mb-4">

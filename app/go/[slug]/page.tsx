@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { businessConfig } from "@/content/config";
-import { packagesData } from "@/content/packages";
 import { officialFees } from "@/content/fees";
 import { LeadForm } from "@/components/modules/LeadForm";
 import { MobileStickyBar } from "@/components/layout/MobileStickyBar";
@@ -123,8 +122,6 @@ export default async function AdLandingPage({
     notFound();
   }
 
-  const pkg = packagesData.find((p) => p.slug === campaign.packageSlug);
-
   return (
     <div className="min-h-screen flex flex-col bg-riverstone">
       {/* DISTRACTION-FREE AD HEADER (No standard navbar; only wordmark + WhatsApp) */}
@@ -133,9 +130,9 @@ export default async function AdLandingPage({
           <Image
             src="/Assets/logo my corbett trip.png"
             alt="My Corbett Trip"
-            width={160}
-            height={79}
-            className="h-9 sm:h-11 w-auto object-contain"
+            width={280}
+            height={92}
+            className="h-14 sm:h-16 w-auto object-contain"
             priority
           />
         </Link>

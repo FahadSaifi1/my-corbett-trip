@@ -17,7 +17,6 @@ import {
   IconShieldCheck,
   IconCheck,
   IconWhatsApp,
-  IconArrowRight,
 } from "@/components/ui/CustomIcons";
 
 export async function generateStaticParams() {

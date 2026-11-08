@@ -15,11 +15,7 @@ import { LeadForm } from "@/components/modules/LeadForm";
 import { FaqAccordion } from "@/components/modules/FaqAccordion";
 import { Badge } from "@/components/ui/Badge";
 import {
-  IconCalendar,
   IconShieldCheck,
-  IconGypsy,
-  IconArrowRight,
-  IconBinoculars,
   IconCompass,
 } from "@/components/ui/CustomIcons";
 

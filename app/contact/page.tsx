@@ -6,7 +6,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { MobileStickyBar } from "@/components/layout/MobileStickyBar";
 import { LeadForm } from "@/components/modules/LeadForm";
-import { IconWhatsApp, IconPhone, IconShieldCheck, IconCompass } from "@/components/ui/CustomIcons";
+import { IconWhatsApp, IconPhone, IconCompass } from "@/components/ui/CustomIcons";
 
 export const metadata: Metadata = {
   title: "Contact Concierge Desk | My Corbett Trip",

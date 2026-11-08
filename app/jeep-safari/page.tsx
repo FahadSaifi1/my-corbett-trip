@@ -1,6 +1,5 @@
 import React from "react";
 import type { Metadata } from "next";
-import Link from "next/link";
 import Image from "next/image";
 import { businessConfig } from "@/content/config";
 import { officialFees } from "@/content/fees";
@@ -10,14 +9,11 @@ import { MobileStickyBar } from "@/components/layout/MobileStickyBar";
 import { LeadForm } from "@/components/modules/LeadForm";
 import { FaqAccordion } from "@/components/modules/FaqAccordion";
 import { SafariCostCalculator } from "@/components/modules/SafariCostCalculator";
-import { Badge } from "@/components/ui/Badge";
 import {
   IconGypsy,
   IconShieldCheck,
-  IconCheck,
   IconIdCard,
   IconPhoneBan,
-  IconArrowRight,
 } from "@/components/ui/CustomIcons";
 
 export const metadata: Metadata = {

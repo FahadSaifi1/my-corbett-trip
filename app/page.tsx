@@ -3,7 +3,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { businessConfig } from "@/content/config";
 import { packagesData } from "@/content/packages";
-import { corbettRules2026 } from "@/content/rules";
 import { reviews } from "@/content/reviews";
 import { teamMembers } from "@/content/team";
 import { partnerStays } from "@/content/stays";

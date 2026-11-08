@@ -145,7 +145,7 @@ export const LeadForm = ({
   return (
     <div
       id="lead-planner"
-      className={`bg-cream border border-sal-forest/15 p-5 sm:p-7 text-sal-forest shadow-sm ${className}`}
+      className={`bg-cream border border-sal-forest/15 ${compact ? "p-4 sm:p-5" : "p-5 sm:p-7"} text-sal-forest shadow-sm ${className}`}
     >
       {/* Header & Step Indicator */}
       <div className="mb-5 pb-4 border-b border-sal-forest/10 flex items-center justify-between">

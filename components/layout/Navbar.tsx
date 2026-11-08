@@ -39,13 +39,13 @@ export const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20">
           {/* Logo / Brand Name */}
-          <Link href="/" className="flex items-center py-1" aria-label="My Corbett Trip Home">
+          <Link href="/" className="flex items-center" aria-label="My Corbett Trip Home">
             <Image
               src="/Assets/logo my corbett trip.png"
               alt="My Corbett Trip"
-              width={180}
-              height={89}
-              className="h-10 sm:h-12 w-auto object-contain"
+              width={260}
+              height={86}
+              className="h-12 sm:h-16 w-auto object-contain"
               priority
             />
           </Link>

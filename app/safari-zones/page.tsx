@@ -8,7 +8,7 @@ import { Footer } from "@/components/layout/Footer";
 import { MobileStickyBar } from "@/components/layout/MobileStickyBar";
 import { ZoneSeasonFilter } from "@/components/modules/ZoneSeasonFilter";
 import { Badge } from "@/components/ui/Badge";
-import { IconShieldCheck, IconArrowRight, IconPugmark } from "@/components/ui/CustomIcons";
+import { IconArrowRight } from "@/components/ui/CustomIcons";
 
 export const metadata: Metadata = {
   title: "Corbett Safari Zones Guide: All 8 CTR Tourism Zones Compared",
