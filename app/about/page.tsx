@@ -31,7 +31,7 @@ export default function AboutPage() {
               alt="My Corbett Trip Local Naturalists and Conservation Ethics"
               fill
               priority
-              className="object-cover object-center brightness-105 contrast-[1.03]"
+              className="object-cover object-[75%_center] md:object-center brightness-105 contrast-[1.03]"
               sizes="100vw"
             />
             {/* Clear neutral scrim without green tint */}

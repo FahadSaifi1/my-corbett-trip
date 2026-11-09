@@ -101,7 +101,7 @@ export default function HomePage() {
               alt="Bengal Tiger in Corbett Tiger Reserve"
               fill
               priority
-              className="object-cover object-center brightness-105 contrast-[1.03]"
+              className="object-cover object-[75%_center] md:object-center brightness-105 contrast-[1.03]"
               sizes="100vw"
             />
             {/* Clear neutral scrim without green tint: softly dims behind text on the left, keeping the photo eye-catchy and vibrant */}

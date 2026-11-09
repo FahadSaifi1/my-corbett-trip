@@ -133,6 +133,7 @@ const WILDLIFE_LIST: WildlifeSpecies[] = [
 
 export const InteractiveWildlifeTracker: React.FC = () => {
   const [activeSpeciesId, setActiveSpeciesId] = useState<string>("tiger");
+  const [hasUserSelected, setHasUserSelected] = useState<boolean>(false);
 
   const currentSpecies =
     WILDLIFE_LIST.find((s) => s.id === activeSpeciesId) || WILDLIFE_LIST[0];
@@ -175,17 +176,22 @@ export const InteractiveWildlifeTracker: React.FC = () => {
         </div>
 
         {/* Interactive Species Selector Tabs */}
-        <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 sm:gap-3 mb-5">
+        <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 sm:gap-3 mb-4">
           {WILDLIFE_LIST.map((sp) => {
-            const isActive = sp.id === activeSpeciesId;
+            const isSpeciesMatch = sp.id === activeSpeciesId;
             return (
               <button
                 key={sp.id}
                 type="button"
-                onClick={() => setActiveSpeciesId(sp.id)}
+                onClick={() => {
+                  setActiveSpeciesId(sp.id);
+                  setHasUserSelected(true);
+                }}
                 className={`p-3 text-left transition-all border cursor-pointer relative ${
-                  isActive
-                    ? "bg-sal-forest text-cream border-sal-forest shadow-md scale-[1.02]"
+                  isSpeciesMatch
+                    ? hasUserSelected
+                      ? "bg-sal-forest text-cream border-sal-forest shadow-md scale-[1.02]"
+                      : "bg-white/80 text-sal-forest/90 border-sal-forest/15 hover:bg-white hover:border-sal-forest/40 md:bg-sal-forest md:text-cream md:border-sal-forest md:shadow-md md:scale-[1.02]"
                     : "bg-white/80 text-sal-forest/90 border-sal-forest/15 hover:bg-white hover:border-sal-forest/40"
                 }`}
               >
@@ -195,16 +201,30 @@ export const InteractiveWildlifeTracker: React.FC = () => {
                 <div className="font-serif font-bold text-sm sm:text-base leading-tight">
                   {sp.name}
                 </div>
-                {isActive && (
-                  <span className="absolute bottom-0 left-0 right-0 h-1 bg-tiger-ochre" />
+                {isSpeciesMatch && (
+                  <span
+                    className={`absolute bottom-0 left-0 right-0 h-1 bg-tiger-ochre ${
+                      !hasUserSelected ? "hidden md:block" : "block"
+                    }`}
+                  />
                 )}
               </button>
             );
           })}
         </div>
 
-        {/* Active Species Detail Card */}
-        <div className="bg-white/90 backdrop-blur-xs border border-sal-forest/15 p-5 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start shadow-sm">
+        {/* Mobile-only interactive invitation prompt (hidden once user taps a species or on desktop) */}
+        {!hasUserSelected && (
+          <div className="relative z-10 md:hidden py-3 px-4 bg-white/90 border border-sal-forest/15 text-center mb-4">
+            <p className="text-xs font-medium text-sal-forest flex items-center justify-center gap-1.5">
+              <span className="text-tiger-ochre text-sm font-bold">👆</span>
+              <span>Tap any species above to view tracking radar & zones</span>
+            </p>
+          </div>
+        )}
+
+        {/* Active Species Detail Card (hidden on mobile until user clicks a species) */}
+        <div className={`bg-white/90 backdrop-blur-xs border border-sal-forest/15 p-5 sm:p-6 ${!hasUserSelected ? "hidden md:grid" : "grid"} grid-cols-1 lg:grid-cols-12 gap-6 items-start shadow-sm`}>
           {/* Left Column: Sighting Overview */}
           <div className="lg:col-span-7 space-y-5">
             <div className="flex flex-wrap items-center gap-2">

@@ -29,6 +29,7 @@ const MONTHS = [
 export const ZoneSeasonFilter = () => {
   // Default to November (Dhikala & Durga Devi opening month)
   const [selectedMonth, setSelectedMonth] = useState<number>(11);
+  const [hasUserSelected, setHasUserSelected] = useState<boolean>(false);
 
   const activeMonthObj = MONTHS.find((m) => m.num === selectedMonth) || MONTHS[1];
 
@@ -64,17 +65,22 @@ export const ZoneSeasonFilter = () => {
       </div>
 
       {/* Month Pills Selector */}
-      <div className="relative z-10 flex items-center gap-1.5 overflow-x-auto pb-2 mb-4 scrollbar-none">
+      <div className="relative z-10 flex items-center gap-1.5 overflow-x-auto pb-2 mb-3 scrollbar-none">
         {MONTHS.map((m) => {
-          const isActive = m.num === selectedMonth;
+          const isMonthMatch = m.num === selectedMonth;
           return (
             <button
               key={m.num}
               type="button"
-              onClick={() => setSelectedMonth(m.num)}
+              onClick={() => {
+                setSelectedMonth(m.num);
+                setHasUserSelected(true);
+              }}
               className={`px-3.5 py-2 text-xs uppercase tracking-wider font-medium shrink-0 transition-all cursor-pointer border ${
-                isActive
-                  ? "bg-sal-forest text-cream border-sal-forest shadow-sm"
+                isMonthMatch
+                  ? hasUserSelected
+                    ? "bg-sal-forest text-cream border-sal-forest shadow-sm"
+                    : "bg-white text-sal-forest/80 border-sal-forest/20 hover:border-sal-forest md:bg-sal-forest md:text-cream md:border-sal-forest md:shadow-sm"
                   : "bg-white text-sal-forest/80 border-sal-forest/20 hover:border-sal-forest"
               }`}
             >
@@ -84,15 +90,26 @@ export const ZoneSeasonFilter = () => {
         })}
       </div>
 
-      <div className="relative z-10 mb-4">
+      {/* Mobile-only interactive invitation prompt (hidden once user taps a month or on desktop) */}
+      {!hasUserSelected && (
+        <div className="relative z-10 md:hidden py-3 px-4 bg-white/90 border border-sal-forest/15 text-center mb-3">
+          <p className="text-xs font-medium text-sal-forest flex items-center justify-center gap-1.5">
+            <span className="text-tiger-ochre text-sm font-bold">👆</span>
+            <span>Tap your planned travel month above to view open zones</span>
+          </p>
+        </div>
+      )}
+
+      {/* Zone count info line (hidden on mobile until month is chosen) */}
+      <div className={`relative z-10 mb-4 ${!hasUserSelected ? "hidden md:block" : "block"}`}>
         <span className="text-xs font-mono text-sal-forest/70">
           Showing <span className="font-bold text-sal-forest">{openZones.length} zones</span>{" "}
           operational in <span className="font-bold text-sal-forest">{activeMonthObj.full}</span>:
         </span>
       </div>
 
-      {/* Zone Cards Grid */}
-      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {/* Zone Cards Grid (hidden on mobile until user clicks a month) */}
+      <div className={`relative z-10 ${!hasUserSelected ? "hidden md:grid" : "grid"} grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4`}>
         {openZones.map((zone) => (
           <div
             key={zone.slug}
@@ -133,8 +150,9 @@ export const ZoneSeasonFilter = () => {
         ))}
       </div>
 
+      {/* Closed Zones Notice */}
       {closedZones.length > 0 && (
-        <div className="mt-6 pt-4 border-t border-sal-forest/10">
+        <div className={`mt-6 pt-4 border-t border-sal-forest/10 ${!hasUserSelected ? "hidden md:block" : "block"}`}>
           <p className="text-xs text-sal-forest/60">
             <span className="font-medium text-sal-forest/80">Closed in {activeMonthObj.full}:</span>{" "}
             {closedZones.map((z) => `${z.name} (Opens ${z.season.split("–")[0].trim()})`).join(", ")}
