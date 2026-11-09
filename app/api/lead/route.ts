@@ -100,8 +100,9 @@ export async function POST(req: NextRequest) {
       </div>
     `;
 
-    const smtpUser = process.env.SMTP_USER || process.env.GMAIL_USER;
-    const smtpPass = process.env.SMTP_PASS || process.env.GMAIL_APP_PASSWORD;
+    const smtpUser = (process.env.SMTP_USER || process.env.GMAIL_USER)?.trim();
+    const rawPass = process.env.SMTP_PASS || process.env.GMAIL_APP_PASSWORD;
+    const smtpPass = rawPass ? (process.env.SMTP_HOST ? rawPass.trim() : rawPass.replace(/\s+/g, "")) : undefined;
     let emailSent = false;
 
     // Method 1: Nodemailer (Gmail or Custom SMTP)
