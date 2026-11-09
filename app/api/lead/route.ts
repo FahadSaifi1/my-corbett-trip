@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import crypto from "crypto";
+import nodemailer from "nodemailer";
 import { businessConfig } from "@/content/config";
 
 // Zod Schema for validation
@@ -67,52 +68,88 @@ export async function POST(req: NextRequest) {
     // 3. Generate Unique Lead ID
     const leadId = generateLeadId();
     const timestamp = new Date().toISOString();
-
-    console.log(`[LEAD RECEIVED] ${leadId}: ${leadData.fullName} (${normalizedMobile}) - ${leadData.interest}`);
+    console.log(`[LEAD RECEIVED ${timestamp}] ${leadId}: ${leadData.fullName} (${normalizedMobile}) - ${leadData.interest}`);
 
     // 4. Downstream Dispatches (Resilient Execution: Never fail user response if downstream webhook is offline)
     const downstreamLogs: string[] = [];
 
-    // 4a. Resend Email Dispatch (if configured)
+    // 4a. Email Dispatch (Nodemailer SMTP or Resend API)
     const leadEmailRecipient = process.env.LEAD_NOTIFY_EMAIL || businessConfig.email;
-    const resendApiKey = process.env.RESEND_API_KEY;
-    const resendFromEmail = process.env.RESEND_FROM_EMAIL || "My Corbett Trip Leads <onboarding@resend.dev>";
+    const emailSubject = `🐅 New Safari Lead [${leadId}]: ${leadData.fullName} - ${leadData.interest}`;
+    const emailHtml = `
+      <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; border: 1px solid #e5e5e5; border-radius: 8px;">
+        <h2 style="color: #2D4A3E; margin-top: 0;">🐅 New Safari Lead Received</h2>
+        <p style="background: #F4EEDB; padding: 8px 12px; border-radius: 4px; font-weight: bold; color: #1F362D;">
+          Booking Ref: ${leadId}
+        </p>
+        <table style="width: 100%; border-collapse: collapse; margin-top: 16px;">
+          <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; color: #666;">Full Name:</td><td style="padding: 8px 0; border-bottom: 1px solid #eee; font-weight: bold; color: #111;">${leadData.fullName}</td></tr>
+          <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; color: #666;">Mobile:</td><td style="padding: 8px 0; border-bottom: 1px solid #eee; font-weight: bold; color: #2D4A3E;"><a href="tel:${normalizedMobile}" style="color: #2D4A3E; text-decoration: none;">${normalizedMobile}</a> (<a href="https://wa.me/${normalizedMobile.replace('+', '')}?text=${encodeURIComponent('Hello ' + leadData.fullName + ', thank you for inquiring with My Corbett Trip regarding your ' + leadData.interest + ' safari!')}" style="color: #25D366; font-weight: bold;">WhatsApp Chat</a>)</td></tr>
+          <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; color: #666;">City:</td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${leadData.city}</td></tr>
+          <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; color: #666;">Email:</td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${leadData.email || "Not provided"}</td></tr>
+          <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; color: #666;">Safari Interest:</td><td style="padding: 8px 0; border-bottom: 1px solid #eee; font-weight: bold; color: #C8782A;">${leadData.interest}</td></tr>
+          <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; color: #666;">Travel Month:</td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${leadData.travelMonth}</td></tr>
+          <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; color: #666;">Travellers:</td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${leadData.adults} Adults, ${leadData.children} Children</td></tr>
+          ${leadData.budgetRange ? `<tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; color: #666;">Budget / Resort:</td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${leadData.budgetRange}</td></tr>` : ''}
+          <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; color: #666;">Source / Campaign:</td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${leadData.sourceSlug || "Direct Website"}</td></tr>
+          <tr><td style="padding: 8px 0; color: #666;">Received At:</td><td style="padding: 8px 0;">${new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })} IST</td></tr>
+        </table>
+        <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid #eee; font-size: 12px; color: #888;">
+          My Corbett Trip Lead Notification System &bull; Jim Corbett National Park Official Safari Despatch
+        </div>
+      </div>
+    `;
 
-    if (resendApiKey && leadEmailRecipient) {
+    const smtpUser = process.env.SMTP_USER || process.env.GMAIL_USER;
+    const smtpPass = process.env.SMTP_PASS || process.env.GMAIL_APP_PASSWORD;
+    let emailSent = false;
+
+    // Method 1: Nodemailer (Gmail or Custom SMTP)
+    if (smtpUser && smtpPass && leadEmailRecipient) {
       try {
+        const isCustomHost = Boolean(process.env.SMTP_HOST);
+        const transporter = isCustomHost
+          ? nodemailer.createTransport({
+              host: process.env.SMTP_HOST,
+              port: Number(process.env.SMTP_PORT) || 465,
+              secure: Number(process.env.SMTP_PORT) === 465 || !process.env.SMTP_PORT,
+              auth: { user: smtpUser, pass: smtpPass },
+            })
+          : nodemailer.createTransport({
+              service: "gmail",
+              auth: { user: smtpUser, pass: smtpPass },
+            });
+
+        await transporter.sendMail({
+          from: process.env.SMTP_FROM || `"My Corbett Trip" <${smtpUser}>`,
+          to: leadEmailRecipient,
+          replyTo: leadData.email || undefined,
+          subject: emailSubject,
+          html: emailHtml,
+        });
+
+        downstreamLogs.push("Nodemailer email sent successfully");
+        emailSent = true;
+      } catch (err) {
+        console.error("Nodemailer dispatch error:", err);
+      }
+    }
+
+    // Method 2: Resend API (Fallback if Nodemailer not configured)
+    if (!emailSent && process.env.RESEND_API_KEY && leadEmailRecipient) {
+      try {
+        const resendFromEmail = process.env.RESEND_FROM_EMAIL || "My Corbett Trip Leads <onboarding@resend.dev>";
         const resendRes = await fetch("https://api.resend.com/emails", {
           method: "POST",
           headers: {
-            Authorization: `Bearer ${resendApiKey}`,
+            Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
             from: resendFromEmail,
             to: leadEmailRecipient,
-            subject: `🐅 New Lead [${leadId}]: ${leadData.fullName} - ${leadData.interest}`,
-            html: `
-              <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; border: 1px solid #e5e5e5; border-radius: 8px;">
-                <h2 style="color: #2D4A3E; margin-top: 0;">🐅 New Safari Lead Received</h2>
-                <p style="background: #F4EEDB; padding: 8px 12px; border-radius: 4px; font-weight: bold; color: #1F362D;">
-                  Booking Ref: ${leadId}
-                </p>
-                <table style="width: 100%; border-collapse: collapse; margin-top: 16px;">
-                  <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; color: #666;">Full Name:</td><td style="padding: 8px 0; border-bottom: 1px solid #eee; font-weight: bold; color: #111;">${leadData.fullName}</td></tr>
-                  <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; color: #666;">Mobile:</td><td style="padding: 8px 0; border-bottom: 1px solid #eee; font-weight: bold; color: #2D4A3E;"><a href="tel:${normalizedMobile}" style="color: #2D4A3E; text-decoration: none;">${normalizedMobile}</a> (<a href="https://wa.me/${normalizedMobile.replace('+', '')}?text=${encodeURIComponent('Hello ' + leadData.fullName + ', thank you for inquiring with My Corbett Trip regarding your ' + leadData.interest + ' safari!')}" style="color: #25D366; font-weight: bold;">WhatsApp Chat</a>)</td></tr>
-                  <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; color: #666;">City:</td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${leadData.city}</td></tr>
-                  <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; color: #666;">Email:</td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${leadData.email || "Not provided"}</td></tr>
-                  <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; color: #666;">Safari Interest:</td><td style="padding: 8px 0; border-bottom: 1px solid #eee; font-weight: bold; color: #C8782A;">${leadData.interest}</td></tr>
-                  <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; color: #666;">Travel Month:</td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${leadData.travelMonth}</td></tr>
-                  <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; color: #666;">Travellers:</td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${leadData.adults} Adults, ${leadData.children} Children</td></tr>
-                  ${leadData.budgetRange ? `<tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; color: #666;">Budget / Resort:</td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${leadData.budgetRange}</td></tr>` : ''}
-                  <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; color: #666;">Source / Campaign:</td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${leadData.sourceSlug || "Direct Website"}</td></tr>
-                  <tr><td style="padding: 8px 0; color: #666;">Received At:</td><td style="padding: 8px 0;">${new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })} IST</td></tr>
-                </table>
-                <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid #eee; font-size: 12px; color: #888;">
-                  My Corbett Trip Lead Notification System &bull; Jim Corbett National Park Official Safari Despatch
-                </div>
-              </div>
-            `,
+            subject: emailSubject,
+            html: emailHtml,
           }),
         });
 
