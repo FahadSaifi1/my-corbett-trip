@@ -75,34 +75,53 @@ export async function POST(req: NextRequest) {
 
     // 4a. Resend Email Dispatch (if configured)
     const leadEmailRecipient = process.env.LEAD_NOTIFY_EMAIL || businessConfig.email;
-    if (process.env.RESEND_API_KEY && leadEmailRecipient) {
+    const resendApiKey = process.env.RESEND_API_KEY;
+    const resendFromEmail = process.env.RESEND_FROM_EMAIL || "My Corbett Trip Leads <onboarding@resend.dev>";
+
+    if (resendApiKey && leadEmailRecipient) {
       try {
-        await fetch("https://api.resend.com/emails", {
+        const resendRes = await fetch("https://api.resend.com/emails", {
           method: "POST",
           headers: {
-            Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+            Authorization: `Bearer ${resendApiKey}`,
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            from: "My Corbett Trip Leads <leads@mycorbetttrip.com>",
+            from: resendFromEmail,
             to: leadEmailRecipient,
             subject: `🐅 New Lead [${leadId}]: ${leadData.fullName} - ${leadData.interest}`,
             html: `
-              <h2>New Safari Lead Received: ${leadId}</h2>
-              <p><strong>Name:</strong> ${leadData.fullName}</p>
-              <p><strong>Phone:</strong> ${normalizedMobile}</p>
-              <p><strong>City:</strong> ${leadData.city}</p>
-              <p><strong>Email:</strong> ${leadData.email || "Not provided"}</p>
-              <p><strong>Interest:</strong> ${leadData.interest}</p>
-              <p><strong>Travel Month:</strong> ${leadData.travelMonth}</p>
-              <p><strong>Party Size:</strong> ${leadData.adults} Adults, ${leadData.children} Children</p>
-              <p><strong>Budget Style:</strong> ${leadData.budgetRange}</p>
-              <p><strong>Source / Ad:</strong> ${leadData.sourceSlug || "Direct"}</p>
-              <p><strong>Received At:</strong> ${timestamp}</p>
+              <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; border: 1px solid #e5e5e5; border-radius: 8px;">
+                <h2 style="color: #2D4A3E; margin-top: 0;">🐅 New Safari Lead Received</h2>
+                <p style="background: #F4EEDB; padding: 8px 12px; border-radius: 4px; font-weight: bold; color: #1F362D;">
+                  Booking Ref: ${leadId}
+                </p>
+                <table style="width: 100%; border-collapse: collapse; margin-top: 16px;">
+                  <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; color: #666;">Full Name:</td><td style="padding: 8px 0; border-bottom: 1px solid #eee; font-weight: bold; color: #111;">${leadData.fullName}</td></tr>
+                  <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; color: #666;">Mobile:</td><td style="padding: 8px 0; border-bottom: 1px solid #eee; font-weight: bold; color: #2D4A3E;"><a href="tel:${normalizedMobile}" style="color: #2D4A3E; text-decoration: none;">${normalizedMobile}</a> (<a href="https://wa.me/${normalizedMobile.replace('+', '')}?text=${encodeURIComponent('Hello ' + leadData.fullName + ', thank you for inquiring with My Corbett Trip regarding your ' + leadData.interest + ' safari!')}" style="color: #25D366; font-weight: bold;">WhatsApp Chat</a>)</td></tr>
+                  <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; color: #666;">City:</td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${leadData.city}</td></tr>
+                  <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; color: #666;">Email:</td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${leadData.email || "Not provided"}</td></tr>
+                  <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; color: #666;">Safari Interest:</td><td style="padding: 8px 0; border-bottom: 1px solid #eee; font-weight: bold; color: #C8782A;">${leadData.interest}</td></tr>
+                  <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; color: #666;">Travel Month:</td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${leadData.travelMonth}</td></tr>
+                  <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; color: #666;">Travellers:</td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${leadData.adults} Adults, ${leadData.children} Children</td></tr>
+                  ${leadData.budgetRange ? `<tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; color: #666;">Budget / Resort:</td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${leadData.budgetRange}</td></tr>` : ''}
+                  <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; color: #666;">Source / Campaign:</td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${leadData.sourceSlug || "Direct Website"}</td></tr>
+                  <tr><td style="padding: 8px 0; color: #666;">Received At:</td><td style="padding: 8px 0;">${new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })} IST</td></tr>
+                </table>
+                <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid #eee; font-size: 12px; color: #888;">
+                  My Corbett Trip Lead Notification System &bull; Jim Corbett National Park Official Safari Despatch
+                </div>
+              </div>
             `,
           }),
         });
-        downstreamLogs.push("Resend email sent");
+
+        const resendJson = await resendRes.json();
+        if (!resendRes.ok) {
+          console.error("Resend API returned error:", resendJson);
+        } else {
+          downstreamLogs.push("Resend email sent successfully");
+        }
       } catch (err) {
         console.error("Resend error:", err);
       }
